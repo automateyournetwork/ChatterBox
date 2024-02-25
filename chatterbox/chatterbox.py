@@ -214,7 +214,7 @@ class Chatterbox:
             formatted_history += f"{speaker}{msg['text']}\n"
         return formatted_history
     
-netbox_url = "https://demo.netbox.dev"
+netbox_url = os.getenv('NETBOX_URL')
 netbox_token = os.getenv('NETBOX_TOKEN')
 
 # Page functions
