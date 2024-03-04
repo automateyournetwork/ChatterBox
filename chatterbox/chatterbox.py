@@ -11,7 +11,7 @@ from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import DirectoryLoader,JSONLoader
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_experimental.text_splitter import SemanticChunker
 
 # Instantiate openAI client
 load_dotenv()
@@ -160,11 +160,7 @@ class Chatterbox:
 
     def split_into_chunks(self):
         # Create a text splitter
-        self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=1000,
-            chunk_overlap=100,
-            length_function=len,
-        )
+        self.self.text_splitter = SemanticChunker(OpenAIEmbeddings())
         self.docs = self.text_splitter.split_documents(self.pages)
 
     def store_in_chroma(self):
